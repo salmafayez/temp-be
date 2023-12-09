@@ -1,0 +1,23 @@
+version: '3.8'
+
+networks:
+  temp_net:
+    internal: true
+    name: temp_net
+
+services:
+  temp-db:
+    image: mysql:8.1.0
+    container_name: temp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: temp_db
+      MYSQL_USER: temp_admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - 3312:3306
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+
+
